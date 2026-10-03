@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FreelanceHub — Choose Your Freelancing Platform</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#070b16;
+    --card:#101727;
+    --text:#f5f7ff;
+    --muted:#9da7bc;
+    --primary:#00c896;
+    --secondary:#5b7cff;
+    --border:rgba(255,255,255,.09);
+    --shadow:0 18px 55px rgba(0,0,0,.28);
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 0%,rgba(0,200,150,.16),transparent 30%),
+        radial-gradient(circle at 90% 5%,rgba(91,124,255,.15),transparent 30%),
+        linear-gradient(135deg,#070b16,#0b1220 55%,#070a13);
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 7%;
+    background:rgba(7,11,22,.84);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:23px;
+    font-weight:800;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    font-size:23px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    box-shadow:0 8px 30px rgba(0,200,150,.25);
+}
+
+.logo span{
+    color:#00d5a0;
+}
+
+.header-badge{
+    padding:9px 16px;
+    border-radius:30px;
+    background:rgba(0,200,150,.1);
+    border:1px solid rgba(0,200,150,.22);
+    color:#70e7c5;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* HERO */
+
+.hero{
+    max-width:1150px;
+    margin:auto;
+    padding:72px 20px 35px;
+    text-align:center;
+}
+
+.hero-badge{
+    display:inline-flex;
+    padding:9px 17px;
+    border-radius:30px;
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--border);
+    color:#6ce4c1;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:21px;
+}
+
+.hero h1{
+    font-size:clamp(40px,6vw,72px);
+    line-height:1.02;
+    letter-spacing:-2px;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    background:linear-gradient(90deg,#00d5a0,#6484ff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:760px;
+    margin:auto;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.7;
+}
+
+/* SEARCH */
+
+.search-area{
+    max-width:780px;
+    margin:32px auto 20px;
+    position:relative;
+}
+
+.search-box{
+    width:100%;
+    height:63px;
+    border-radius:19px;
+    border:1px solid var(--border);
+    outline:none;
+    padding:0 22px 0 58px;
+    background:rgba(255,255,255,.055);
+    color:white;
+    font-size:16px;
+    box-shadow:var(--shadow);
+}
+
+.search-box::placeholder{
+    color:#788197;
+}
+
+.search-box:focus{
+    border-color:#00c896;
+    box-shadow:0 0 0 4px rgba(0,200,150,.1);
+}
+
+.search-icon{
+    position:absolute;
+    left:21px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:21px;
+}
+
+/* CATEGORIES */
+
+.categories{
+    max-width:1280px;
+    margin:10px auto 38px;
+    padding:0 20px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:9px;
+}
+
+.category-btn{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.045);
+    color:#aeb6ca;
+    border-radius:25px;
+    padding:10px 16px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.category-btn:hover,
+.category-btn.active{
+    background:linear-gradient(135deg,var(--primary),#00a980);
+    color:white;
+    border-color:transparent;
+    transform:translateY(-2px);
+}
+
+/* MAIN */
+
+main{
+    max-width:1280px;
+    margin:auto;
+    padding:0 20px 75px;
+}
+
+.section-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.section-top h2{
+    font-size:25px;
+}
+
+.result-count{
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* GRID */
+
+.freelance-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:17px;
+}
+
+/* CARD */
+
+.freelance-card{
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025)),
+        var(--card);
+    border:1px solid var(--border);
+    border-radius:21px;
+    padding:21px;
+    cursor:pointer;
+    transition:.25s;
+    min-height:245px;
+}
+
+.freelance-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(0,200,150,.42);
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+
+.freelance-card::after{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    right:-65px;
+    bottom:-65px;
+    border-radius:50%;
+    background:rgba(0,200,150,.08);
+}
+
+.site-icon{
+    width:61px;
+    height:61px;
+    display:grid;
+    place-items:center;
+    border-radius:18px;
+    background:linear-gradient(135deg,rgba(0,200,150,.18),rgba(91,124,255,.12));
+    border:1px solid rgba(0,200,150,.22);
+    color:#72e6c6;
+    font-size:18px;
+    font-weight:900;
+    margin-bottom:17px;
+}
+
+.site-name{
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.site-category{
+    color:#858ea7;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.recommendation{
+    color:#b8bfd0;
+    font-size:12px;
+    line-height:1.55;
+    min-height:38px;
+}
+
+.visit{
+    margin-top:15px;
+    color:#65ddbe;
+    font-size:12px;
+    font-weight:800;
+}
+
+/* EMPTY */
+
+.empty{
+    display:none;
+    text-align:center;
+    padding:70px 20px;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:40px 20px;
+    text-align:center;
+    background:#050810;
+    border-top:1px solid var(--border);
+    color:#8d96aa;
+}
+
+footer strong{
+    color:white;
+}
+
+footer p{
+    margin-top:8px;
+    font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+    .freelance-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:700px){
+    header{
+        padding:17px 5%;
+    }
+
+    .header-badge{
+        display:none;
+    }
+
+    .hero{
+        padding-top:50px;
+    }
+
+    .freelance-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .freelance-card{
+        padding:17px;
+    }
+}
+
+@media(max-width:480px){
+    .freelance-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .section-top{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+```
+<div class="logo">
+    <div class="logo-icon">💼</div>
+    Freelance<span>Hub</span>
+</div>
+
+<div class="header-badge">
+    50+ Freelancing Platforms
+</div>
+```
+
+</header>
+
+<section class="hero">
+
+```
+<div class="hero-badge">
+    💻 Your Gateway to Freelancing
+</div>
+
+<h1>
+    Choose Your <span>Freelancing</span> Platform
+</h1>
+
+<p>
+    Video editing, web development, graphic design, logo design,
+    writing, marketing aur bohat si skills ke liye apna freelancing platform choose karein.
+</p>
+
+<div class="search-area">
+
+    <span class="search-icon">🔎</span>
+
+    <input
+        id="searchInput"
+        class="search-box"
+        type="text"
+        placeholder="Search freelancing platform or skill..."
+        autocomplete="off"
+    >
+
+</div>
+```
+
+</section>
+
+<div class="categories">
+
+```
+<button class="category-btn active" data-category="All">
+    All
+</button>
+
+<button class="category-btn" data-category="Video Editing">
+    🎬 Video Editing
+</button>
+
+<button class="category-btn" data-category="Web Development">
+    💻 Web Development
+</button>
+
+<button class="category-btn" data-category="Graphic Design">
+    🎨 Graphic Design
+</button>
+
+<button class="category-btn" data-category="Logo Design">
+    ✏️ Logo Design
+</button>
+
+<button class="category-btn" data-category="UI/UX">
+    🖥️ UI/UX
+</button>
+
+<button class="category-btn" data-category="Writing">
+    ✍️ Writing
+</button>
+
+<button class="category-btn" data-category="Digital Marketing">
+    📢 Digital Marketing
+</button>
+
+<button class="category-btn" data-category="SEO">
+    🔍 SEO
+</button>
+
+<button class="category-btn" data-category="AI Services">
+    🤖 AI Services
+</button>
+
+<button class="category-btn" data-category="Voice Over">
+    🎙️ Voice Over
+</button>
+
+<button class="category-btn" data-category="Translation">
+    🌎 Translation
+</button>
+
+<button class="category-btn" data-category="Data Entry">
+    ⌨️ Data Entry
+</button>
+
+<button class="category-btn" data-category="Virtual Assistant">
+    🧑‍💼 Virtual Assistant
+</button>
+
+<button class="category-btn" data-category="Photography">
+    📷 Photography
+</button>
+
+<button class="category-btn" data-category="General">
+    💼 General
+</button>
+```
+
+</div>
+
+<main>
+
+```
+<div class="section-top">
+
+    <h2>Popular Freelancing Platforms</h2>
+
+    <div class="result-count" id="resultCount"></div>
+
+</div>
+
+<div class="freelance-grid" id="freelanceGrid"></div>
+
+<div class="empty" id="emptyState">
+
+    <div class="empty-icon">🔍</div>
+
+    <h3>No platform found</h3>
+
+    <p>Try another platform name or skill.</p>
+
+</div>
+```
+
+</main>
+
+<footer>
+
+```
+<strong>FreelanceHub</strong>
+
+<p>
+    A simple gateway to popular freelancing platforms.
+</p>
+```
+
+</footer>
+
+<script>
+
+const platforms = [
+
+/* ================= GENERAL ================= */
+
+{
+name:"Upwork",
+category:"General",
+icon:"UW",
+recommendation:"One of the largest freelance marketplaces for developers, designers, writers, marketers and many other professionals.",
+url:"https://www.upwork.com/"
+},
+
+{
+name:"Fiverr",
+category:"General",
+icon:"FI",
+recommendation:"Popular marketplace where freelancers can offer services through individual gigs.",
+url:"https://www.fiverr.com/"
+},
+
+{
+name:"Freelancer",
+category:"General",
+icon:"FR",
+recommendation:"Large global freelance marketplace for projects, contests and professional services.",
+url:"https://www.freelancer.com/"
+},
+
+{
+name:"PeoplePerHour",
+category:"General",
+icon:"PP",
+recommendation:"Freelance marketplace for professional services, projects and hourly work.",
+url:"https://www.peopleperhour.com/"
+},
+
+{
+name:"Guru",
+category:"General",
+icon:"GU",
+recommendation:"Freelancing platform for finding projects across technology, design, writing and business.",
+url:"https://www.guru.com/"
+},
+
+{
+name:"Toptal",
+category:"General",
+icon:"TO",
+recommendation:"Premium talent network focused on experienced freelancers and professional clients.",
+url:"https://www.toptal.com/"
+},
+
+{
+name:"Contra",
+category:"General",
+icon:"CO",
+recommendation:"Modern independent-work platform for freelancers, creators and professionals.",
+url:"https://contra.com/"
+},
+
+{
+name:"Workana",
+category:"General",
+icon:"WK",
+recommendation:"Freelance marketplace connecting clients with independent professionals.",
+url:"https://www.workana.com/"
+},
+
+{
+name:"Truelancer",
+category:"General",
+icon:"TR",
+recommendation:"Freelance marketplace covering programming, design, writing and business services.",
+url:"https://www.truelancer.com/"
+},
+
+{
+name:"99designs",
+category:"Graphic Design",
+icon:"99",
+recommendation:"Specialized platform for graphic designers and design contests.",
+url:"https://99designs.com/"
+},
+
+/* ================= VIDEO ================= */
+
+{
+name:"Fiverr Video",
+category:"Video Editing",
+icon:"FV",
+recommendation:"Large marketplace for video editing, YouTube videos, reels and promotional content.",
+url:"https://www.fiverr.com/categories/video-animation"
+},
+
+{
+name:"Upwork Video",
+category:"Video Editing",
+icon:"UV",
+recommendation:"Find video editing and video production freelance jobs.",
+url:"https://www.upwork.com/freelance-jobs/video-editing/"
+},
+
+{
+name:"Freelancer Video",
+category:"Video Editing",
+icon:"FV",
+recommendation:"Video editing and animation projects from clients around the world.",
+url:"https://www.freelancer.com/jobs/video-editing/"
+},
+
+{
+name:"PeoplePerHour Video",
+category:"Video Editing",
+icon:"PV",
+recommendation:"Offer or find professional video editing services.",
+url:"https://www.peopleperhour.com/"
+},
+
+{
+name:"ProductionHUB",
+category:"Video Editing",
+icon:"PH",
+recommendation:"Professional network for film, television and video production work.",
+url:"https://www.productionhub.com/"
+},
+
+{
+name:"Mandy",
+category:"Video Editing",
+icon:"MA",
+recommendation:"Creative industry job and networking platform for film and television professionals.",
+url:"https://www.mandy.com/"
+},
+
+/* ================= WEB DEVELOPMENT ================= */
+
+{
+name:"Toptal Developers",
+category:"Web Development",
+icon:"TD",
+recommendation:"Premium freelance network for experienced software and web developers.",
+url:"https://www.toptal.com/developers"
+},
+
+{
+name:"Gun.io",
+category:"Web Development",
+icon:"GI",
+recommendation:"Platform focused on connecting companies with software engineering talent.",
+url:"https://www.gun.io/"
+},
+
+{
+name:"Arc.dev",
+category:"Web Development",
+icon:"AR",
+recommendation:"Remote developer marketplace for freelance and long-term development opportunities.",
+url:"https://arc.dev/"
+},
+
+{
+name:"Lemon.io",
+category:"Web Development",
+icon:"LE",
+recommendation:"Developer-focused network connecting companies with remote engineers.",
+url:"https://lemon.io/"
+},
+
+{
+name:"Wellfound",
+category:"Web Development",
+icon:"WF",
+recommendation:"Startup-focused platform with technology and remote opportunities.",
+url:"https://wellfound.com/"
+},
+
+{
+name:"Codeable",
+category:"Web Development",
+icon:"CB",
+recommendation:"Specialized freelance marketplace for WordPress developers.",
+url:"https://codeable.io/"
+},
+
+{
+name:"Codementor",
+category:"Web Development",
+icon:"CM",
+recommendation:"Platform for finding developers, coding experts and development work.",
+url:"https://www.codementor.io/"
+},
+
+{
+name:"Topcoder",
+category:"Web Development",
+icon:"TC",
+recommendation:"Technology community featuring coding challenges and freelance opportunities.",
+url:"https://www.topcoder.com/"
+},
+
+/* ================= GRAPHIC DESIGN ================= */
+
+{
+name:"Dribbble",
+category:"Graphic Design",
+icon:"DR",
+recommendation:"Popular design community with opportunities for designers and creative professionals.",
+url:"https://dribbble.com/"
+},
+
+{
+name:"Behance",
+category:"Graphic Design",
+icon:"BE",
+recommendation:"Creative portfolio platform with jobs and opportunities for designers.",
+url:"https://www.behance.net/"
+},
+
+{
+name:"DesignCrowd",
+category:"Graphic Design",
+icon:"DC",
+recommendation:"Design marketplace featuring creative projects and contests.",
+url:"https://www.designcrowd.com/"
+},
+
+{
+name:"Crowdspring",
+category:"Graphic Design",
+icon:"CS",
+recommendation:"Creative marketplace for logos, branding, graphics and design projects.",
+url:"https://www.crowdspring.com/"
+},
+
+{
+name:"DesignHill",
+category:"Graphic Design",
+icon:"DH",
+recommendation:"Design marketplace for logos, branding, websites and creative services.",
+url:"https://www.designhill.com/"
+},
+
+{
+name:"Working Not Working",
+category:"Graphic Design",
+icon:"WN",
+recommendation:"Creative professional network for designers, artists and creative talent.",
+url:"https://workingnotworking.com/"
+},
+
+/* ================= LOGO ================= */
+
+{
+name:"LogoGround",
+category:"Logo Design",
+icon:"LG",
+recommendation:"Marketplace focused specifically on professional logo designs and branding.",
+url:"https://logoground.com/"
+},
+
+{
+name:"LogoMyWay",
+category:"Logo Design",
+icon:"LM",
+recommendation:"Logo design marketplace and contest platform.",
+url:"https://www.logomyway.com/"
+},
+
+{
+name:"DesignContest",
+category:"Logo Design",
+icon:"DC",
+recommendation:"Design contest platform covering logos, branding and graphic projects.",
+url:"https://www.designcontest.com/"
+},
+
+{
+name:"Hatchwise",
+category:"Logo Design",
+icon:"HW",
+recommendation:"Creative contest platform for logos, naming, design and branding.",
+url:"https://www.hatchwise.com/"
+},
+
+/* ================= UI UX ================= */
+
+{
+name:"UI8",
+category:"UI/UX",
+icon:"UI",
+recommendation:"Design marketplace and community for UI kits, templates and digital products.",
+url:"https://ui8.net/"
+},
+
+{
+name:"UX Design Jobs",
+category:"UI/UX",
+icon:"UX",
+recommendation:"Job and opportunity resource focused on UX and product design.",
+url:"https://www.uxdesignjobs.com/"
+},
+
+{
+name:"Dribbble Design Jobs",
+category:"UI/UX",
+icon:"DJ",
+recommendation:"Design job marketplace for UI, UX, product and visual designers.",
+url:"https://dribbble.com/jobs"
+},
+
+{
+name:"Behance Jobs",
+category:"UI/UX",
+icon:"BJ",
+recommendation:"Creative jobs and opportunities for designers and digital artists.",
+url:"https://www.behance.net/joblist"
+},
+
+/* ================= WRITING ================= */
+
+{
+name:"ProBlogger Jobs",
+category:"Writing",
+icon:"PB",
+recommendation:"Job board focused on blogging and freelance writing opportunities.",
+url:"https://problogger.com/jobs/"
+},
+
+{
+name:"Contena",
+category:"Writing",
+icon:"CT",
+recommendation:"Platform focused on freelance writing and content opportunities.",
+url:"https://www.contena.co/"
+},
+
+{
+name:"Textbroker",
+category:"Writing",
+icon:"TB",
+recommendation:"Content writing marketplace connecting writers with clients.",
+url:"https://www.textbroker.com/"
+},
+
+{
+name:"WriterAccess",
+category:"Writing",
+icon:"WA",
+recommendation:"Content marketplace for writers, editors and content professionals.",
+url:"https://www.writeraccess.com/"
+},
+
+{
+name:"Constant Content",
+category:"Writing",
+icon:"CC",
+recommendation:"Marketplace for professional written content and freelance writers.",
+url:"https://www.constant-content.com/"
+},
+
+{
+name:"Skyword",
+category:"Writing",
+icon:"SK",
+recommendation:"Content marketing platform connecting brands with creative talent.",
+url:"https://www.skyword.com/"
+},
+
+/* ================= MARKETING ================= */
+
+{
+name:"HubSpot",
+category:"Digital Marketing",
+icon:"HS",
+recommendation:"Marketing platform and resource hub with opportunities and professional tools.",
+url:"https://www.hubspot.com/"
+},
+
+{
+name:"MarketerHire",
+category:"Digital Marketing",
+icon:"MH",
+recommendation:"Platform connecting businesses with experienced marketing professionals.",
+url:"https://marketerhire.com/"
+},
+
+{
+name:"Mayple",
+category:"Digital Marketing",
+icon:"MP",
+recommendation:"Marketplace connecting companies with vetted marketing professionals.",
+url:"https://www.mayple.com/"
+},
+
+{
+name:"Growth Collective",
+category:"Digital Marketing",
+icon:"GC",
+recommendation:"Network of freelance marketing specialists for growing businesses.",
+url:"https://growthcollective.com/"
+},
+
+{
+name:"We Work Remotely",
+category:"Digital Marketing",
+icon:"WR",
+recommendation:"Remote work platform with marketing and digital professional opportunities.",
+url:"https://weworkremotely.com/"
+},
+
+/* ================= SEO ================= */
+
+{
+name:"SEOClerks",
+category:"SEO",
+icon:"SC",
+recommendation:"Marketplace focused on SEO, traffic, backlinks and digital marketing services.",
+url:"https://www.seoclerks.com/"
+},
+
+{
+name:"Legiit",
+category:"SEO",
+icon:"LE",
+recommendation:"Marketplace for SEO, marketing, content and digital services.",
+url:"https://legiit.com/"
+},
+
+{
+name:"BlackHatWorld",
+category:"SEO",
+icon:"BH",
+recommendation:"Online SEO and digital marketing community and marketplace.",
+url:"https://www.blackhatworld.com/"
+},
+
+{
+name:"Konker",
+category:"SEO",
+icon:"KO",
+recommendation:"Freelance marketplace with SEO and digital marketing services.",
+url:"https://www.konker.io/"
+},
+
+/* ================= AI ================= */
+
+{
+name:"Fiverr AI Services",
+category:"AI Services",
+icon:"FA",
+recommendation:"Marketplace for AI-assisted design, writing, automation and creative services.",
+url:"https://www.fiverr.com/categories/ai-services"
+},
+
+{
+name:"Upwork AI Jobs",
+category:"AI Services",
+icon:"UA",
+recommendation:"Find freelance opportunities involving AI, automation, data and machine learning.",
+url:"https://www.upwork.com/freelance-jobs/ai/"
+},
+
+{
+name:"Toptal AI",
+category:"AI Services",
+icon:"TA",
+recommendation:"Professional network with opportunities in AI and advanced technology.",
+url:"https://www.toptal.com/artificial-intelligence"
+},
+
+{
+name:"AI Jobs",
+category:"AI Services",
+icon:"AI",
+recommendation:"Discover opportunities around artificial intelligence and emerging technology.",
+url:"https://ai-jobs.net/"
+},
+
+/* ================= VOICE ================= */
+
+{
+name:"Voices",
+category:"Voice Over",
+icon:"VO",
+recommendation:"Specialized marketplace for voice actors, voice-over and audio work.",
+url:"https://www.voices.com/"
+},
+
+{
+name:"Voice123",
+category:"Voice Over",
+icon:"V1",
+recommendation:"Professional voice-over marketplace connecting talent and clients.",
+url:"https://voice123.com/"
+},
+
+{
+name:"Bodalgo",
+category:"Voice Over",
+icon:"BO",
+recommendation:"International voice-over platform for professional voice talent.",
+url:"https://www.bodalgo.com/"
+},
+
+{
+name:"Voice Crafters",
+category:"Voice Over",
+icon:"VC",
+recommendation:"Professional multilingual voice-over marketplace.",
+url:"https://www.voicecrafters.com/"
+},
+
+/* ================= TRANSLATION ================= */
+
+{
+name:"Gengo",
+category:"Translation",
+icon:"GE",
+recommendation:"Online translation platform connecting translators with global projects.",
+url:"https://gengo.com/"
+},
+
+{
+name:"ProZ",
+category:"Translation",
+icon:"PZ",
+recommendation:"Large professional community and job marketplace for translators.",
+url:"https://www.proz.com/"
+},
+
+{
+name:"TranslatorsCafe",
+category:"Translation",
+icon:"TC",
+recommendation:"Translation community with freelance jobs and professional resources.",
+url:"https://www.translatorscafe.com/"
+},
+
+{
+name:"Smartcat",
+category:"Translation",
+icon:"SC",
+recommendation:"Translation and localization platform for language professionals.",
+url:"https://www.smartcat.com/"
+},
+
+/* ================= DATA ================= */
+
+{
+name:"Clickworker",
+category:"Data Entry",
+icon:"CW",
+recommendation:"Platform offering online microtasks, data and AI-related work.",
+url:"https://www.clickworker.com/"
+},
+
+{
+name:"Microworkers",
+category:"Data Entry",
+icon:"MW",
+recommendation:"Microtask marketplace with data and online task opportunities.",
+url:"https://www.microworkers.com/"
+},
+
+{
+name:"Amazon Mechanical Turk",
+category:"Data Entry",
+icon:"MT",
+recommendation:"Crowdsourcing platform for online human intelligence tasks.",
+url:"https://www.mturk.com/"
+},
+
+{
+name:"Appen",
+category:"Data Entry",
+icon:"AP",
+recommendation:"Global platform offering data, AI and remote project opportunities.",
+url:"https://www.appen.com/"
+},
+
+{
+name:"OneForma",
+category:"Data Entry",
+icon:"OF",
+recommendation:"Remote digital work involving data collection, language and AI projects.",
+url:"https://www.oneforma.com/"
+},
+
+/* ================= VIRTUAL ASSISTANT ================= */
+
+{
+name:"Belay",
+category:"Virtual Assistant",
+icon:"BL",
+recommendation:"Remote professional services including virtual assistant opportunities.",
+url:"https://belaysolutions.com/"
+},
+
+{
+name:"Fancy Hands",
+category:"Virtual Assistant",
+icon:"FH",
+recommendation:"Platform focused on remote virtual assistant and task-based work.",
+url:"https://www.fancyhands.com/"
+},
+
+{
+name:"Time Etc",
+category:"Virtual Assistant",
+icon:"TE",
+recommendation:"Virtual assistant marketplace for remote administrative work.",
+url:"https://www.timeetc.com/"
+},
+
+{
+name:"Zirtual",
+category:"Virtual Assistant",
+icon:"ZI",
+recommendation:"Remote virtual assistant service for administrative and business support.",
+url:"https://www.zirtual.com/"
+},
+
+/* ================= PHOTOGRAPHY ================= */
+
+{
+name:"500px",
+category:"Photography",
+icon:"5P",
+recommendation:"Photography community and marketplace for photographers.",
+url:"https://500px.com/"
+},
+
+{
+name:"Shutterstock",
+category:"Photography",
+icon:"SS",
+recommendation:"Stock photography marketplace where contributors can license creative work.",
+url:"https://www.shutterstock.com/"
+},
+
+{
+name:"Adobe Stock",
+category:"Photography",
+icon:"AS",
+recommendation:"Creative marketplace for photography, illustrations, videos and assets.",
+url:"https://stock.adobe.com/"
+},
+
+{
+name:"iStock",
+category:"Photography",
+icon:"IS",
+recommendation:"Stock photography and creative asset marketplace.",
+url:"https://www.istockphoto.com/"
+},
+
+/* ================= GENERAL EXTRA ================= */
+
+{
+name:"LinkedIn",
+category:"General",
+icon:"IN",
+recommendation:"Professional networking platform with freelance, contract and remote opportunities.",
+url:"https://www.linkedin.com/"
+},
+
+{
+name:"FlexJobs",
+category:"General",
+icon:"FJ",
+recommendation:"Remote and flexible work platform with freelance and contract opportunities.",
+url:"https://www.flexjobs.com/"
+},
+
+{
+name:"Remote OK",
+category:"General",
+icon:"RO",
+recommendation:"Remote job board featuring technology, design, marketing and other roles.",
+url:"https://remoteok.com/"
+},
+
+{
+name:"Remotive",
+category:"General",
+icon:"RE",
+recommendation:"Remote work community and job board for professionals.",
+url:"https://remotive.com/"
+},
+
+{
+name:"SimplyHired",
+category:"General",
+icon:"SH",
+recommendation:"Job search platform with freelance and contract opportunities.",
+url:"https://www.simplyhired.com/"
+},
+
+{
+name:"Indeed",
+category:"General",
+icon:"IN",
+recommendation:"Large job search platform with freelance, contract and remote listings.",
+url:"https://www.indeed.com/"
+},
+
+{
+name:"ZipRecruiter",
+category:"General",
+icon:"ZR",
+recommendation:"Job marketplace with remote, freelance and contract opportunities.",
+url:"https://www.ziprecruiter.com/"
+},
+
+{
+name:"Glassdoor",
+category:"General",
+icon:"GD",
+recommendation:"Professional platform for job search, company research and career opportunities.",
+url:"https://www.glassdoor.com/"
+},
+
+{
+name:"Flexiple",
+category:"Web Development",
+icon:"FX",
+recommendation:"Network connecting businesses with freelance developers and designers.",
+url:"https://flexiple.com/"
+},
+
+{
+name:"Braintrust",
+category:"General",
+icon:"BT",
+recommendation:"Talent network for independent professionals across technology and business.",
+url:"https://www.usebraintrust.com/"
+},
+
+{
+name:"Catalant",
+category:"General",
+icon:"CA",
+recommendation:"Marketplace connecting businesses with independent consultants and experts.",
+url:"https://gocatalant.com/"
+},
+
+{
+name:"Malt",
+category:"General",
+icon:"ML",
+recommendation:"European freelance marketplace for technology, marketing and consulting professionals.",
+url:"https://www.malt.com/"
+},
+
+{
+name:"Twago",
+category:"General",
+icon:"TW",
+recommendation:"European freelance marketplace for IT, design, marketing and business services.",
+url:"https://www.twago.com/"
+},
+
+{
+name:"SolidGigs",
+category:"General",
+icon:"SG",
+recommendation:"Freelance lead service designed to help freelancers discover opportunities.",
+url:"https://solidgigs.com/"
+},
+
+{
+name:"Working Nomads",
+category:"General",
+icon:"WN",
+recommendation:"Remote job board with freelance and flexible professional opportunities.",
+url:"https://www.workingnomads.com/"
+}
+
+];
+
+
+const grid =
+    document.getElementById("freelanceGrid");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const resultCount =
+    document.getElementById("resultCount");
+
+const emptyState =
+    document.getElementById("emptyState");
+
+let selectedCategory = "All";
+
+
+function renderPlatforms(){
+
+    const searchTerm =
+        searchInput.value.toLowerCase().trim();
+
+
+    const filtered =
+        platforms.filter(platform => {
+
+            const matchesSearch =
+                platform.name.toLowerCase().includes(searchTerm) ||
+                platform.category.toLowerCase().includes(searchTerm) ||
+                platform.recommendation.toLowerCase().includes(searchTerm);
+
+            const matchesCategory =
+                selectedCategory === "All" ||
+                platform.category === selectedCategory;
+
+            return matchesSearch && matchesCategory;
+
+        });
+
+
+    grid.innerHTML = "";
+
+
+    resultCount.textContent =
+        `${filtered.length} platform${filtered.length !== 1 ? "s" : ""}`;
+
+
+    if(filtered.length === 0){
+
+        emptyState.style.display = "block";
+
+        return;
+
+    }
+
+
+    emptyState.style.display = "none";
+
+
+    filtered.forEach(platform => {
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "freelance-card";
+
+
+        card.innerHTML = `
+
+            <div class="site-icon">
+                ${platform.icon}
+            </div>
+
+            <div class="site-name">
+                ${platform.name}
+            </div>
+
+            <div class="site-category">
+                ${platform.category}
+            </div>
+
+            <div class="recommendation">
+                ${platform.recommendation}
+            </div>
+
+            <div class="visit">
+                Visit Freelancing Platform →
+            </div>
+
+        `;
+
+
+        card.addEventListener("click",() => {
+
+            window.open(
+                platform.url,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        });
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+searchInput.addEventListener(
+    "input",
+    renderPlatforms
+);
+
+
+document
+.querySelectorAll(".category-btn")
+.forEach(button => {
+
+    button.addEventListener("click",() => {
+
+        document
+        .querySelectorAll(".category-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+
+        button.classList.add("active");
+
+
+        selectedCategory =
+            button.dataset.category;
+
+
+        renderPlatforms();
+
+    });
+
+});
+
+
+renderPlatforms();
+
+</script>
+
+</body>
+</html>
